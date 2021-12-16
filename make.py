@@ -32,12 +32,23 @@ def parse_content():
 
 def create_blog_page_html():
     all_volumes = parse_content()
+    pages = []
     for index, content in enumerate(all_volumes, 1):
-        pprint.pprint(content[-1])
-        print('......')
+        # pprint.pprint(content[-1])
+        # print('......')
         template = env.get_template("blog_page.html")
         with open(f'{index}.html', 'w', encoding='utf-8') as f:
             f.write(template.render(header=content[1], preface=content[2], content=content[-1]))
+        pages.append([f'{index}.html', content[0], content[1]])
+    create_index_page(pages)
+
+
+def create_index_page(pages):
+    template = env.get_template("landing.html")
+    preface = '''\
+    '''
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(template.render(pages=pages, preface=preface))
 
 
 if __name__ == '__main__':
