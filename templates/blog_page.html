@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container mt-3">
+    <div class="row justify-content-start">
+      <div class="col">
+        <a href="index.html"><i class="bi bi-arrow-left"></i></a>
+      </div>
+    </div>
+    <div class="text-center display-6 mb-3">
+      {{header}}
+    </div>
+    <div class="row justify-content-center my-2">
+      <div style="width: 400px;">
+        <img src="./assets/divider.svg" alt="divider" style="width: 400px;">
+      </div>
+    </div>
+
+    {% for poems in content %}
+      <div class="container my-5">
+        <div class="text-center mb-5">
+          <img src="{{poems[-1]}}" alt="poem cover" width="200px" height="200px" class="rounded-circle" style="object-fit: fill;">
+        </div>
+        <div class="row">
+          {% for poem in poems[:-1] %}
+          <div class="col">
+            <div class="text-start">
+              <H4 class="mb-3">{{poem[0]}}</H4>
+              <pre class="text-start">{{poem[1]}}</pre>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <hr>
+      </div>
+    {% endfor %}
+
+    <div class="my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-3 col-sm-12">
+          <p class="text-muted" style="text-align: justify; text-justify: inter-word;">{{preface}}</p>
+        </div>
+        <div class="text-center text-muted mt-5">
+          Found any spelling mistake? Report it <a href="">here!</a>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center my-2">
+      <div style="width: 400px;">
+        <img src="./assets/divider.svg" alt="divider" style="width: 400px;">
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
