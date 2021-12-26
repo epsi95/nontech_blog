@@ -1,3 +1,5 @@
+import datetime
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from poem_parser import parse_poem, parse_date
 import os
@@ -38,7 +40,9 @@ def create_blog_page_html():
         # print('......')
         template = env.get_template("blog_page.html")
         with open(f'{index}.html', 'w', encoding='utf-8') as f:
-            f.write(template.render(header=content[1], preface=content[2], content=content[-1]))
+            f.write(template.render(header=content[1], preface=content[2], content=content[-1],
+                                    year=datetime.datetime.now().year,
+                                    func=lambda x, y: os.path.join(os.path.dirname(x), y)))
         pages.append([f'{index}.html', content[0], content[1]])
     create_index_page(pages)
 
@@ -48,7 +52,7 @@ def create_index_page(pages):
     preface = '''\
     '''
     with open('index.html', 'w', encoding='utf-8') as f:
-        f.write(template.render(pages=pages, preface=preface))
+        f.write(template.render(pages=pages, preface=preface, year=datetime.datetime.now().year))
 
 
 if __name__ == '__main__':
