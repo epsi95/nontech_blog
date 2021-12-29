@@ -31,7 +31,7 @@
                   {% set w,h,img = s.split(' ') %}
                   <div class="text-center my-3"><img src="{{func(poems[-1], img)}}" alt="{{poem[0]}}" width="{{w}}" height="{{h}}" style="max-width: 90%"></div>
                 {% else %}
-                  <p class="text-start my-2">{{line}}</p>
+                  <div class="text-start my-2">{{line|safe}}</div>
                 {% endif %}
               {% endfor %}
             </div>
